@@ -1,9 +1,10 @@
 ﻿const express = require('express');
+const config = require('./config')
 const multer = require('multer');
 const bodyParser = require('body-parser');
 const app = express();
 const ip = require('ip');
-const addr = ip.address();
+const addr = config.ip||ip.address();
 const chalk = require('chalk');
 app.use(bodyParser.json());
 var Storage = multer.diskStorage({
