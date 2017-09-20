@@ -35,5 +35,5 @@ app.use('/images',express.static('images'))
 app.use('/',express.static('public'))
 
 app.listen(2000, function (a) {
-    console.log(`open ${chalk.blue('http://127.0.0.1:2000')} to upload pictures`);
+    console.log(`open ${chalk.blue(`http://${addr}:2000`)} to upload pictures`);
 });
