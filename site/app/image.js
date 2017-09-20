@@ -1,5 +1,6 @@
 import React from 'react';
 import { Upload, Icon, Modal } from 'antd';
+import './image.css';
 
 class PicturesWall extends React.Component {
   state = {

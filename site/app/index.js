@@ -11,10 +11,10 @@ class App extends React.Component {
   render() {
     return (
       <Layout>
-      <Header style={{ position: 'fixed', width: '100%' }}>
-        
+      <Header style={{ position: 'fixed', width: '100%',zIndex:99 }}>
+        <div style={{fontSize:'18px',color:'#fff'}}>工地帮图床</div>
       </Header>
-      <Content style={{ padding: '0 50px', marginTop: 64 }}>
+      <Content style={{ padding: '0 20px', marginTop: 64 }}>
         <div style={{ background: '#fff', padding: 24, minHeight: 380 }}>
           <PicturesWall/>
         </div>

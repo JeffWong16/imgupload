@@ -1,0 +1,31 @@
+.ant-upload.ant-upload-select-picture-card {
+    width: 250px;
+    height: 250px;
+}
+.ant-upload-list-picture-card .ant-upload-list-item-done {
+    width: 250px;
+    height: 250px;
+}
+
+.ant-upload-select-picture-card .ant-upload {
+    width: 250px;
+    height: 250px;
+}
+
+.ant-upload-select-picture-card .ant-upload>div {
+    margin-top: 80px;
+}
+
+@media screen and (max-width: 510px) {
+    
+    .ant-upload-list-picture-card .ant-upload-list-item{
+        float: none;
+    }
+    .ant-upload-list-picture-card .ant-upload-list-item-done{
+        margin: 20px auto;
+    }
+    .ant-upload.ant-upload-select-picture-card{
+        display: block;
+        margin: 20px auto;
+    }
+}
