@@ -1,6 +1,8 @@
 ﻿const express = require('express');
 const config = require('./config')
 const multer = require('multer');
+const md5 = require('md5');
+const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
 const ip = require('ip');
@@ -12,7 +14,7 @@ var Storage = multer.diskStorage({
         callback(null, "./images");
     },
     filename: function (req, file, callback) {
-        callback(null,  `gdb${Date.now().toString().slice(7,12)}${file.originalname}`);
+        callback(null,  `gdb${Date.now().toString().slice(7,12)}${md5(file.originalname).slice(0,10)}${path.extname(file.originalname)}`);
     }
 });
 
