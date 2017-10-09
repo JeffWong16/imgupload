@@ -8,6 +8,12 @@ const app = express();
 const ip = require('ip');
 const addr = config.ip||ip.address();
 const chalk = require('chalk');
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 app.use(bodyParser.json());
 var Storage = multer.diskStorage({
     destination: function (req, file, callback) {
@@ -23,6 +29,7 @@ var upload = multer({ storage: Storage }).array('imgfile',40);
 app.post("/upload", function (req, res) {
     upload(req, res, function (err) {
         if (err) {
+            console.log(err)
             return res.json({
                 result:'error'
             });
