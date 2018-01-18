@@ -8,6 +8,9 @@ const app = express();
 const ip = require('ip');
 const addr = config.ip||ip.address();
 const chalk = require('chalk');
+const Sequelize = require('sequelize');
+const sequelize = require('./database/start');
+const Image = require('./database/image');
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -24,7 +27,7 @@ var Storage = multer.diskStorage({
     }
 });
 
-var upload = multer({ storage: Storage }).array('imgfile',40); 
+var upload = multer({ storage: Storage }).array('imgfile',40);
 
 app.post("/upload", function (req, res) {
     upload(req, res, function (err) {
@@ -34,7 +37,11 @@ app.post("/upload", function (req, res) {
                 result:'error'
             });
         }
-      
+        Image.create({
+          imgUrl: req.files[0].filename
+        }).then(()=> {
+          console.log('已保存');
+        })
         return res.json({
             result:'success',
             path:`http://${addr}:2000/images/${req.files[0].filename}`
