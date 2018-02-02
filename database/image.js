@@ -9,6 +9,9 @@ const Image = sequelize.define('image', {
   imgUrl: {
     type: Sequelize.STRING
   },
+  baseUrl: {
+    type: Sequelize.STRING
+  },
 });
 
 module.exports = Image;
