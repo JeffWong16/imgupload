@@ -54,7 +54,9 @@ app.post("/upload", function (req, res) {
 
 app.use('/minify', (req, res) => {
   sharp(req.originalUrl.replace('/minify', '.'))
-    .webp()
+    .jpeg({
+      quality: 50
+    })
     .toBuffer((err, data, info) => {
       if (err) {
         es.json({error: '找不到图片'});
