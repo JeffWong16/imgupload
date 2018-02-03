@@ -4,9 +4,7 @@ const multer = require('multer');
 const md5 = require('md5');
 const path = require('path');
 const bodyParser = require('body-parser');
-const imagemin = require('imagemin');
-const imageminJpegtran = require('imagemin-jpegtran');
-const imageminPngquant = require('imagemin-pngquant');
+const sharp = require('sharp');
 const app = express();
 const ip = require('ip');
 const addr = config.ip||ip.address();
@@ -48,29 +46,26 @@ app.post("/upload", function (req, res) {
         })
         return res.json({
             result:'success',
-            path:`http://${addr}:2000/minify/images/${req.files[0].filename}`
+            path:`http://${addr}:2000/images/${req.files[0].filename}`,
+            webpPath: `http://${addr}:2000/minnify/images/${req.files[0].filename}`
         });
     });
 });
 
 app.use('/minify', (req, res) => {
-  imagemin([req.originalUrl.replace('/minify/', '')], {
-    plugins: [
-      imageminJpegtran(),
-      imageminPngquant({quality: '65-80'})
-    ]
-  }).then(files => {
-    if (files[0]) {
-      let img = files[0].data;
+  sharp(req.originalUrl.replace('/minify', '.'))
+    .webp()
+    .toBuffer((err, data, info) => {
+      if (err) {
+        es.json({error: '找不到图片'});
+        return;
+      }
       res.set({
-        'Content-Type': 'image/png',
-        'Content-Length': img.length,
+        'Content-Type': 'image/webp',
+        'Content-Length': data.length,
       });
-      res.send(img);
-    } else {
-      res.json({error: '找不到图片'});
-    }
-  });
+      res.send(data);
+    });
 });
 
 app.use('/images',express.static('images'))
