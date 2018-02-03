@@ -47,7 +47,7 @@ app.post("/upload", function (req, res) {
         return res.json({
             result:'success',
             path:`http://${addr}:2000/images/${req.files[0].filename}`,
-            webpPath: `http://${addr}:2000/minnify/images/${req.files[0].filename}`
+            webpPath: `http://${addr}:2000/minify/images/${req.files[0].filename}`
         });
     });
 });
