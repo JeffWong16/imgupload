@@ -63,7 +63,7 @@ app.use('/minify', (req, res) => {
         return;
       }
       res.set({
-        'Content-Type': 'image/webp',
+        'Content-Type': 'image/jpeg',
         'Content-Length': data.length,
       });
       res.send(data);
